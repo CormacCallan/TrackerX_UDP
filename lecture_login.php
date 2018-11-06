@@ -2,8 +2,8 @@
 session_start();
 require_once "database.php";
 
-if (isset($_SESSION['student_session'])) {
-    header("Location: student.php");
+if (isset($_SESSION['lecturer_session'])) {
+    header("Location: lecturer.php");
 }
         
 ?>
@@ -21,9 +21,9 @@ and open the template in the editor.
             src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
-                <script src="login_script.js" type="text/javascript"></script>
-        <script src="validation.min.js" type="text/javascript"></script>
-
+        
+        <script type="text/javascript" src="validation.min.js"></script>
+<script type="text/javascript" src="login_script2.js"></script>
 
         <title></title>
     </head>
@@ -43,7 +43,7 @@ and open the template in the editor.
                     </div>
                 </div>
 
-                <form class="form-signin" method="post" id="login-form" action="login_process.php">
+                <form class="form-signin" method="post" id="login-form" action="login_process2.php">
 
                     <div id="error">
                         <!-- error will be shown here ! -->
@@ -51,8 +51,8 @@ and open the template in the editor.
 
 
                     <div class="login-form">
-                        <h3>Username:</h3>
-                        <input type="text" placeholder="Username" name="username"/><br>
+                        <h3>Email:</h3>
+                        <input type="text" placeholder="Email" name="email"/><br>
                         <h3>Password:</h3>
                         <input type="password" placeholder="Password" name="password"/>
                         <br>
