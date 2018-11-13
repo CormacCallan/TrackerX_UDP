@@ -27,9 +27,7 @@ function randomCode($length = 6) {
 for($x = 0; $x < 1; $x++)
 {
     echo randomCode() . "<br>";
-    echo randomCode(). "<br>";
-    echo randomCode()."<br>";
-    echo randomCode(). "<br>";
+
     
 }
 ?>
@@ -42,18 +40,22 @@ for($x = 0; $x < 1; $x++)
     <p>This example calls a function which performs a calculation and returns the result:</p>
     <button >Try it</button>
     <p id="demo"></p>
-
+<p id="demoz"></p>
     <script>
         var x = myFunction(4, 3);
 //        document.getElementById("demo").innerHTML = x;
 
-        function myFunction() {
+        function myFunction1() {
             var y=<?php echo randomCode(); ?>;
-            document.getElementById("demo").innerHTML = y;
+            document.getElementById("demo").innerHTML = z;
+        }
+        
+                function myFunction2() {
+            var y=<?php echo randomCode(); ?>;
+            document.getElementById("demoz").innerHTML = y;
         }
 
-            setInterval(myFunction(), 3000);
-        
+            setInterval(myFunction1(),myFunction2(), 3000);
 
 
     </script>
