@@ -50,18 +50,19 @@ if($row['status'] == 1){
         <h1>RECORD ATTENDANCE</h1>
         <div class="form__group form__pincode">
             <label>Enter 6-char code from the Screen</label>
-            <input type="text" name="pincode-1" maxlength="1" tabindex="1" placeholder="·" autocomplete="new-password">
-            <input type="text" name="pincode-2" maxlength="1" tabindex="2" placeholder="·" autocomplete="new-password">
-            <input type="text" name="pincode-3" maxlength="1" tabindex="3" placeholder="·" autocomplete="off">
-            <input type="text" name="pincode-4" maxlength="1" tabindex="4" placeholder="·" autocomplete="off">
-            <input type="text" name="pincode-5" maxlength="1" tabindex="5" placeholder="·" autocomplete="off">
-            <input type="text" name="pincode-6" maxlength="1" tabindex="6" placeholder="·" autocomplete="off">
+            <input type="text" name="pincode-1" maxlength="1" tabindex="1" placeholder="·" autocomplete="new-password" class="inputs">
+            <input type="text" name="pincode-2" maxlength="1" tabindex="2" placeholder="·" autocomplete="new-password" class="inputs">
+            <input type="text" name="pincode-3" maxlength="1" tabindex="3" placeholder="·" autocomplete="new-password" class="inputs">
+            <input type="text" name="pincode-4" maxlength="1" tabindex="4" placeholder="·" autocomplete="new-password" class="inputs">
+            <input type="text" name="pincode-5" maxlength="1" tabindex="5" placeholder="·" autocomplete="new-password" class="inputs">
+            <input type="text" name="pincode-6" maxlength="1" tabindex="6" placeholder="·" autocomplete="new-password" class="inputs">
         </div>
         <div class="form__buttons">
            <input type="submit" value="Record" class="button button--primary" name="btn-record" id="btn-record">
         </div>
     </form>
 </div>
+<br>
 
 </body>
 <script src="folder/js.js" type="text/javascript"></script>
