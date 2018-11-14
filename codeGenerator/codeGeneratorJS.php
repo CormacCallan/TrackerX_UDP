@@ -16,7 +16,7 @@ and open the template in the editor.
                             $(document).ready(function () {
 
                 $.ajax({
-                    url: 'result.php', //This is the current doc
+                    url: 'pushCode.php', //This is the current doc
                     type: "POST",
                     data: ({name: generateCode()}),
                     success: function (data) {
@@ -26,8 +26,6 @@ and open the template in the editor.
 
             });
             }
-
-
 
             function generateCode() {
                 var generatedCode = "";
@@ -39,21 +37,12 @@ and open the template in the editor.
                 return generatedCode;
             }
 
-
-
-
-            
                 setInterval(function () {
                   
                     getCode();
                 }, 1000);
 
            
-
-
-
-//return code once with click
-
 
 
 
@@ -66,14 +55,8 @@ and open the template in the editor.
 
     <body>
 
-        <input type="number" min="0" step="1" placeholder="Custom Time">
-        <br>
 
-        <button type="button" id="submitFormData" onclick="pass();" class="btn btn-primary">Submit</button>
-        <br>
-        <br>
-        <button onclick="displayCode()">Generate Code</button>
 
-        <p id="display"></p>
+		<p>You have started the code generator. This will repeat every second unless changed in the javascript</p>
     </body>
 </html>
