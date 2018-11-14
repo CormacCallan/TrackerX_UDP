@@ -4,22 +4,22 @@ include '../database.php';
 
 
 
-echo $userAnswer = $_POST['name']; 
-
-json_decode($userAnswer);
+$passcode = $_POST['name']; 
 
 
-//try {
-//
-//
-//
-//	$stmt = $db->prepare("UPDATE lecturer SET lecturer_passcode = :lecturer_passcode WHERE lecturer_id =1");
-//	$stmt->bindParam(":lecturer_passcode", $passcode);
-//	$stmt->execute();
-//
-//	echo '<div class="alert alert-success">Thanks!<br>
-//                </div>';
-//} catch (PDOException $e) {
-//	echo $e->getMessage();
-//}
+
+
+try {
+
+
+
+	$stmt = $db->prepare("UPDATE lecturer SET lecturer_passcode = :lecturer_passcode WHERE lecturer_id =1");
+	$stmt->bindParam(":lecturer_passcode", $passcode);
+	$stmt->execute();
+        $test=$stmt->fetchAll();
+
+	echo $test;
+} catch (PDOException $e) {
+	echo $e->getMessage();
+}
 ?>

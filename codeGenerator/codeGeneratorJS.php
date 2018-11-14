@@ -8,59 +8,50 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title></title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
-	
-//var tempCode = generateCode();
-
-var tempCode = "Cormac";
 
 
-$(document).ready(function() { 
+            function getCode(){
+                            $(document).ready(function () {
 
-$.ajax({
-     url: 'result.php', //This is the current doc
-     type: "POST",
-     dataType:'json', // add json datatype to get json
-     data: ({name: 1}),
-     success: function(data){
-         console.log(data);
-     }
-});
+                $.ajax({
+                    url: 'result.php', //This is the current doc
+                    type: "POST",
+                    data: ({name: generateCode()}),
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
 
-});
+            });
+            }
 
 
 
+            function generateCode() {
+                var generatedCode = "";
+                var varchar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+                for (var i = 0; i < 6; i++)
+                    generatedCode += varchar.charAt(Math.floor(Math.random() * varchar.length));
 
-	
-			function generateCode() {
-				var generatedCode = "";
-				var varchar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
-				for (var i = 0; i < 6; i++)
-					generatedCode += varchar.charAt(Math.floor(Math.random() * varchar.length));
-
-				return generatedCode;
-			}
+                return generatedCode;
+            }
 
 
 
 
-			function displayCode() {
-		
-				
-				setInterval(function () {
-					document.write(generateCode() + "<br>");
-					//document.write(tempCode);
-				}, 1000);
+            
+                setInterval(function () {
+                  
+                    getCode();
+                }, 1000);
 
-			}
-			
-			
+           
 
-			
+
+
 //return code once with click
 
 
@@ -69,20 +60,20 @@ $.ajax({
 
 
 
-		</script>
+        </script>
 
     </head>
 
     <body>
 
-		<input type="number" min="0" step="1" placeholder="Custom Time">
-		<br>
+        <input type="number" min="0" step="1" placeholder="Custom Time">
+        <br>
 
-	<button type="button" id="submitFormData" onclick="Feedback();" class="btn btn-primary">Submit</button>
-	<br>
-	<br>
-		<button onclick="displayCode()">Generate Code</button>
+        <button type="button" id="submitFormData" onclick="pass();" class="btn btn-primary">Submit</button>
+        <br>
+        <br>
+        <button onclick="displayCode()">Generate Code</button>
 
-		<p id="display"></p>
+        <p id="display"></p>
     </body>
 </html>
