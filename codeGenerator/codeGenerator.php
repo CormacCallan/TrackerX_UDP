@@ -19,7 +19,7 @@ function randomCode($length = 6) {
 }
 
 
-echo hello;
+echo well;
 
 
 
