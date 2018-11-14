@@ -11,17 +11,13 @@ $(document).ready(function () {
             $("#login").width(280);
         }
     }).resize();
-    
-     $("#mark-all-btn").on("click",function() {
-        
-     $('.redx').hide();
-                    $('.greenTick').show();
-    
+    $("#mark-all-btn").on("click", function () {
+        $('.redx').hide();
+        $('.greenTick').show();
     });
 
-    
-     $("#submitAtt").on("click",function() {
-         
+
+    $("#submitAtt").on("click", function () {
         var text = 1;
         //creating ajax object
         $.ajax({
@@ -32,20 +28,12 @@ $(document).ready(function () {
             //data to send
             data: {status: text},
             success: function () {
-               $("#mark-all-btn").hide();
-               $("#submitAtt").hide();
-               
-               $("#attendance_recorded").show();
-         
+                $("#mark-all-btn").hide();
+                $("#submitAtt").hide();
+                $("#attendance_recorded").show();
             }
-            
-               });
-      
-});
-    
-
-
-
+        });
+    });
 
 });
 
@@ -99,39 +87,47 @@ function getCurrentTime() {
     displayHtml += "<li><h1>Current Date</h1><span class='foldable'><span>" + year + "</span><span>" + month + "</span><span>" + date + "</span></li>";
     displayHtml += "<li><h1>Current Time</h1><span class='foldable'><span>" + hour + "</span><span>" + min + "</span><span>" + sec + "</span></li>";
     displayHtml += "</ul>";
-    
+
     document.getElementById('clock').innerHTML = displayHtml;
 }
 
- $("#mark-all-btn").on("click",function() {
-        
-     $('.redx').hide();
-                    $('.greenTick').show();
-    
+$("#mark-all-btn").on("click", function () {
+
+    $('.redx').hide();
+    $('.greenTick').show();
+
+});
+
+
+$("#submitAtt").on("click", function () {
+
+    var text = 1;
+    //creating ajax object
+    $.ajax({
+        //method is post
+        type: 'POST',
+        // send the data to another PHP file 
+        url: 'setAttendance.php',
+        //data to send
+        data: {attendance: text},
+        success: function () {
+            $("#mark-all-btn").hide();
+            $("#submitAtt").hide();
+
+            $("#attendanceRecordedMessage").show();
+
+        }
+
     });
 
-    
-     $("#submitAtt").on("click",function() {
-         
-        var text = 1;
-        //creating ajax object
-        $.ajax({
-            //method is post
-            type: 'POST',
-            // send the data to another PHP file 
-            url: 'setAttendance.php',
-            //data to send
-            data: {attendance: text},
-            success: function () {
-               $("#mark-all-btn").hide();
-               $("#submitAtt").hide();
-               
-               $("#attendanceRecordedMessage").show();
-         
-            }
-            
-               });
-      
 });
 
 setInterval(getCurrentTime, 1000);
+
+/* student_SignIn.php */
+
+$(".inputs").keyup(function () {
+    if (this.value.length == this.maxLength) {
+      $(this).next('.inputs').focus();
+    }
+});
