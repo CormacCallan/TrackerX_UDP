@@ -19,12 +19,6 @@ body {
 
 }
 
-.center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .header img{
     height: 100%; 
     position: relative;
@@ -976,12 +970,4 @@ span.time {
     -moz-box-shadow: none; 
     -webkit-box-shadow: none;
     box-shadow: none; 
-}​
-
-.greenTick{
-    display: none;
-}
-
-#attendanceRecordedMessage{
-    display:none;
-}
+}​;;

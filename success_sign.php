@@ -11,7 +11,7 @@ include "header.php";
                 <span class="glyphicon glyphicon-ok"></span>
             </div>
             <h1>Success!</h1>
-            <p>Your Attendance Has been Signed!!!</p>
+            <p>Your Attendance Had Signed!!!</p>
             <button type="button" class="redo btn">Ok</button>
             <span class="change">-- Click to see opposite state --</span>
         </div>

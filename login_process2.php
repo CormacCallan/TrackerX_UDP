@@ -8,7 +8,7 @@ if (isset($_POST['btn-login'])) {
 
     try {
 
-        $query = "SELECT * FROM lecturer WHERE email=:email";
+        $query = "SELECT * FROM lecturer WHERE lecturer_email=:email";
         $statement = $db->prepare($query);
         $statement->bindValue(':email', $email);
         $statement->execute();

@@ -7,7 +7,7 @@ if (!isset($_SESSION['lecturer_session'])) {
     header("Location: lecture_login.php");
 }
 //get all subjects
-$query = "SELECT * FROM subject WHERE lecture_id=:lecture_id AND subject_date = CURDATE() AND subject_finish > CURTIME()";
+$query = "SELECT * FROM subject WHERE lecture_id=:lecture_id AND day = DAYNAME(CURDATE()) AND start_time <= CURTIME() AND end_time >= CURTIME()";
 $statement = $db->prepare($query);
 $statement->bindValue(':lecture_id', $_SESSION['lecturer_session']);
 $statement->execute();
@@ -15,13 +15,23 @@ $row = $statement->fetch();
 
 $studentCount = 1;
 
+//get subject group associated with current class that lecture is teaching
+$query2 = 'SELECT * FROM subject_group WHERE subject_id = :subject_id';
+$statement2 = $db->prepare($query2);
+$statement2->bindValue(':subject_id', $row['subject_id']);
+$statement2->execute();
+$row2 = $statement2->fetch();
 
-$query3 = 'SELECT * FROM attendance WHERE subject_id = :subject_id ORDER BY student_id';
+
+//get students who have the group id
+$query3 = 'SELECT * FROM student WHERE group_id = :group_id ORDER BY student_id';
 $statement3 = $db->prepare($query3);
-$statement3->bindValue(':subject_id', $row['subject_id']);
+$statement3->bindValue(':group_id', $row2['group_id']);
 $statement3->execute();
-$attendances = $statement3->fetchAll();
+$students = $statement3->fetchAll();
 $statement3->closeCursor();
+
+
 
 
 
@@ -52,7 +62,7 @@ and open the template in the editor.
                     <th>No</th>
                     <th>Student ID</th>
                     <th>Student Name</th>
-                    <th><span class="date"><?php echo   date('D',strtotime($row['subject_date']))." ". $row['subject_date'] ?> </span><span class="time"><?php echo  $row['subject_time']." - ". $row['subject_finish'] ?></span></th>
+                    <th><span class="date"><?php echo   $row['day']?> </span><span class="time"><?php echo  $row['start_time']." - ". $row['end_time'] ?></span></th>
                     <th>Date</th>
                 </tr>
             </thead>
@@ -64,31 +74,15 @@ and open the template in the editor.
                 </tr>
             </tfoot>
             <tbody>
-                <?php foreach ($attendances as $student) : ?>
+                <?php foreach ($students as $student) : ?>
                 <tr>
                     
                       <td><?php echo $studentCount++ ?></td> 
-                      <td><?php 
-                      
-                        $query4 = 'SELECT * FROM student WHERE student_id = :student_id ORDER BY student_id';
-                        $statement4 = $db->prepare($query4);
-                        $statement4->bindValue(':student_id', $student['student_id']);
-                        $statement4->execute();
-                        $row2 = $statement4->fetch();
-                                  
-                      echo $row2['d_number']; ?></td> 
-                            <td><?php echo $row2['student_name']; ?></td>
-                            <td><?php 
-                                  
-                            if($student['status'] === 0)
-                            {
-                                echo    '<div class="redx"><img src="image/x-png-35402.png"'.'alt="red x"'.'/></div>';
-                            }
-                            else
-                            {
-                                 echo    '<img src="image/green.png"'.'alt="green tick"'.'/>';
-                            }
-                            ?>   
+                      <td><?php                                                         
+                      echo $student['d_number']; ?></td> 
+            
+            <td>   <div class="links"><a class="active"href="studentInfo.php?student_id=<?php echo $student['student_id'];?>"><?php echo $student['student_name']; ?></a></div></td>
+                            <td><div class="redx"><img src="image/x-png-35402.png" alt="red x"/></div>
                                 <div class="greenTick" style="display: none"><img src="image/green.png" alt="green tick"/></div> </td>        
                  <?php endforeach; ?>
 
