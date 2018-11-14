@@ -62,7 +62,6 @@ if($row['status'] == 1){
         </div>
     </form>
 </div>
-<br>
 
 </body>
 <script src="folder/js.js" type="text/javascript"></script>

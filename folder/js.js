@@ -124,10 +124,11 @@ $("#submitAtt").on("click", function () {
 
 setInterval(getCurrentTime, 1000);
 
-/* student_SignIn.php */
+/* student_SignIn.php focus input*/
 
 $(".inputs").keyup(function () {
     if (this.value.length == this.maxLength) {
       $(this).next('.inputs').focus();
     }
 });
+
