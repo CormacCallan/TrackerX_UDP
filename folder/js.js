@@ -121,8 +121,20 @@ $("#submitAtt").on("click", function () {
     });
 
 });
-
+function getCount(){
+ $.ajax({
+            url: 'liveCount.php',
+            type: 'GET',
+            dataType: 'html',
+            success: function (data) {
+             data = $.trim(data);
+ data = data.split('|');
+                $('#count_').html("Live Count:"+data[0]+"/"+data[1]);
+            }
+        });
+        }
 setInterval(getCurrentTime, 1000);
+setInterval(getCount, 1000);
 
 /* student_SignIn.php */
 

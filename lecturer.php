@@ -38,7 +38,7 @@ $statement3->closeCursor();
             </div>
             <div id="timeDisplay" ></div>
         </div>
-
+<p id="count_" >sadsd</p>
         <a href="logout2.php"><h2>&nbsp;Sign Out</h2></a>
         <div class="upcoming">
             <p class="up-title"> CURRENT CLASS </p>

@@ -99,6 +99,7 @@ if($row14 = $statement14->fetch())
 
         
 ?>
+    <script src="folder/js.js" type="text/javascript"></script>
 <div class="container ">
     <div class=" center row">
         <div id="currentTime">
@@ -109,6 +110,8 @@ if($row14 = $statement14->fetch())
         <div id="timeDisplay" ></div>
     </div>
     <a href="logout.php"><h2>&nbsp;Sign Out</h2></a>
+
+     <p id="count_" >sadsd</p>
     <div class="upcoming">
         <p class="up-title"> CURRENT CLASS </p>
         <ul class="up-plan">
