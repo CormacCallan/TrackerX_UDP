@@ -7,8 +7,9 @@ $('document').ready(function ()
                     password: {
                         required: true
                     },
-                    username: {
-                        required: true
+                    email: {
+                        required: true,
+                        email: true
                     }
                 },
         messages:
@@ -16,9 +17,8 @@ $('document').ready(function ()
                     password: {
                         required: "Please enter your password"
                     },
-                    username: {
-                        required: "Please enter your username"
-                    }
+                   
+            email: "please enter your email address"
 
 
          },
@@ -43,7 +43,7 @@ $('document').ready(function ()
             {
                 if (response === "ok") 
                 {
-                    setTimeout(' window.location.href = "student.php"; ', 4000);
+                    setTimeout(' window.location.href = "lecturer.php"; ', 3000);
                 } 
                 else if (response === "Invalid login, please try again") 
                 {

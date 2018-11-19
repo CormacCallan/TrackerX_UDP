@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['lecturer_session'])) {
-    header("Location: lecture_login.php");
+    header("Location: index.php");
 }
 function setAttendance() {
 

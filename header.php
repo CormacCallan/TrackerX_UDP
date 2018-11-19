@@ -14,7 +14,6 @@ and open the template in the editor.
         <link href="folder/main.css" rel="stylesheet" type="text/css"/>
         <script src="folder/js.js" type="text/javascript"></script>
         <script src="login_script.js" type="text/javascript"></script>
-        <script src="login_script2.js" type="text/javascript"></script>
         <script src="validation.min.js" type="text/javascript"></script>
       <script type="text/javascript" src="code.js"></script>
     </head>
@@ -26,5 +25,7 @@ and open the template in the editor.
                 ​
             </div>
 
-            <img src="image/logo.png" alt=""/>
+            <img src="image/logo.png" alt=""/>  <a href="logout.php" class="logout" style="text-decoration: none"><h2>Sign Out</h2></a>
+                  <p id="lecturer_name">lecturer_name</p>
+
         </div>

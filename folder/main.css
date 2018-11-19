@@ -907,6 +907,7 @@ span.time {
     text-shadow: 0 1px 0 #fff;
 }
 
+
 /* bg */
 
 .foldable {
@@ -965,9 +966,27 @@ span.time {
     left: auto;
 }
 
+/*#displayCurrentClass 
+{
+    display: none;
+}*/
+
+#noClass
+{
+  display: none;
+}
+
+/*#displayStudentCurrentClass
+{
+    display: none;
+}*/
+
 .foldable span:last-child { 
     border-right:none;
     -moz-box-shadow: none; 
     -webkit-box-shadow: none;
     box-shadow: none; 
 }​;;
+
+
+

@@ -11,29 +11,98 @@ $(document).ready(function () {
             $("#login").width(280);
         }
     }).resize();
-    $("#mark-all-btn").on("click", function () {
-        $('.redx').hide();
-        $('.greenTick').show();
+
+    $("#mark-all-btn").click(function () {
+        $(this).text($(this).text() === 'Mark all as Present' ? 'Mark all as Absent' : 'Mark all as Present');
+        $('.redx').toggle();
+        $('.greenTick').toggle();
     });
 
 
     $("#submitAtt").on("click", function () {
-        var text = 1;
+
+        var text = $("#redOrGreen").text();
         //creating ajax object
         $.ajax({
             //method is post
-            type: 'POST',
+            //   type: 'POST',
             // send the data to another PHP file 
-            url: 'setAttendance.php',
+            //   url: 'setAttendance.php',
             //data to send
             data: {status: text},
             success: function () {
-                $("#mark-all-btn").hide();
-                $("#submitAtt").hide();
-                $("#attendance_recorded").show();
+                $("#btns").hide();
+                $(".greenTable").hide();
+                $(".subject_detail").hide();
+                $("#attendance_recorded").fadeIn();
+
+            }
+
+        });
+
+    });
+    
+     function getCurrentStudentClass() {
+  
+                $.ajax({ 
+                    type:'GET',          
+                    url: 'getCurrentStudentClass.php',
+                    dataType: 'html',  
+                    success: function (data) {
+                     $('#displayStudentCurrentClass').html(data).fadeIn(3000);                     
+                    }
+                });
+
+           }
+            setInterval(getCurrentStudentClass, 1000);
+            
+         function getCurrentLecturerClass() {
+  
+                $.ajax({ 
+                    type:'GET',          
+                    url: 'getCurrentLecturerClass.php',
+                    dataType: 'html',  
+                    success: function (data) {
+                     $('#displayLecturerCurrentClass').html(data).fadeIn(3000); 
+                     $('#lecture-btns').show();
+                    }
+                });
+
+           }
+           function liveCount(){
+        
+ $.ajax({
+            url: 'liveCount.php',
+            type: 'GET',
+            dataType: 'html',
+            success: function (data) {
+             
+                $('#count_').html("Live Count:"+data);
             }
         });
-    });
+    }
+    
+ $.ajax({
+            url: 'getLecturerName.php',
+            type: 'GET',
+            dataType: 'html',
+            success: function (data) {
+             
+                $('#lecturer_name').html("Welcome :"+data);
+            }
+        });
+
+  $.ajax({
+            url: 'getLecturerName.php',
+            type: 'GET',
+            dataType: 'html',
+            success: function (data) {
+            $('#lecturer_name').html("Welcome :"+data);
+            }
+        });
+setInterval(liveCount, 1000);
+            setInterval(getCurrentLecturerClass, 1000);   
+            
 
 });
 
@@ -90,56 +159,8 @@ function getCurrentTime() {
 
     document.getElementById('clock').innerHTML = displayHtml;
 }
-
-$("#mark-all-btn").on("click", function () {
-
-    $('.redx').hide();
-    $('.greenTick').show();
-
-});
-
-
-$("#submitAtt").on("click", function () {
-
-    var text = 1;
-    //creating ajax object
-    $.ajax({
-        //method is post
-        type: 'POST',
-        // send the data to another PHP file 
-        url: 'setAttendance.php',
-        //data to send
-        data: {attendance: text},
-        success: function () {
-            $("#mark-all-btn").hide();
-            $("#submitAtt").hide();
-
-            $("#attendanceRecordedMessage").show();
-
-        }
-
-    });
-
-});
-function getCount(){
- $.ajax({
-            url: 'liveCount.php',
-            type: 'GET',
-            dataType: 'html',
-            success: function (data) {
-             data = $.trim(data);
- data = data.split('|');
-                $('#count_').html("Live Count:"+data[0]+"/"+data[1]);
-            }
-        });
-        }
 setInterval(getCurrentTime, 1000);
-setInterval(getCount, 1000);
 
-/* student_SignIn.php */
 
-$(".inputs").keyup(function () {
-    if (this.value.length == this.maxLength) {
-      $(this).next('.inputs').focus();
-    }
-});
+
+

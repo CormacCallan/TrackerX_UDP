@@ -5,7 +5,19 @@ require_once "database.php";
 if (isset($_SESSION['student_session'])) {
     header("Location: student.php");
 }
-        
+
+if (isset($_SESSION['lecturer_session'])) {
+    header("Location: lecturer.php");
+}
+
+
+
+
+
+
+
+
+    
 ?>
 <!DOCTYPE html>
 <!--
@@ -27,7 +39,7 @@ and open the template in the editor.
 
         <title></title>
     </head>
-    <body>
+     <body>
         <?php
         // put your code here
         ?>
@@ -51,8 +63,8 @@ and open the template in the editor.
 
 
                     <div class="login-form">
-                        <h3>Username:</h3>
-                        <input type="text" placeholder="Username" name="username"/><br>
+                        <h3>Email:</h3>
+                        <input type="text" placeholder="Email" name="email"/><br>
                         <h3>Password:</h3>
                         <input type="password" placeholder="Password" name="password"/>
                         <br>

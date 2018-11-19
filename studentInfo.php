@@ -4,7 +4,7 @@ require_once "database.php";
 include "header.php";
 
 if (!isset($_SESSION['lecturer_session'])) {
-    header("Location: lecture_login.php");
+    header("Location: index.php");
 }
 //get student_id selected from link in tabledisplay.php
 
@@ -21,9 +21,9 @@ $statement2->bindValue(':group_id', $row['group_id']);
 $statement2->execute();
 $row2 = $statement2->fetch();
 
-$query3 = "SELECT * FROM subject WHERE lecture_id=:lecture_id AND day = DAYNAME(CURDATE()) AND start_time <= CURTIME() AND end_time >= CURTIME()";
+$query3 = "SELECT * FROM subject WHERE lecturer_id=:lecturer_id AND day = DAYNAME(CURDATE()) AND start_time <= CURTIME() AND end_time >= CURTIME()";
 $statement3 = $db->prepare($query3);
-$statement3->bindValue(':lecture_id', $_SESSION['lecturer_session']);
+$statement3->bindValue(':lecturer_id', $_SESSION['lecturer_session']);
 $statement3->execute();
 $row3 = $statement3->fetch();
 
@@ -68,13 +68,12 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title></title>
     </head>
-     <a href="logout2.php"><h3>&nbsp;Sign Out</h3></a>
     <body>
-        <h1>Name: <?php echo $row['student_name'];?></h1>
-        <h1>D Number: <?php echo $row['d_number'];?></h1>
-        <h1>Group: <?php echo $row2['group_name'];?></h1>
-        <h1>Email: <?php echo $row['email'];?></h1>
-        <h1>% of classes attended: <?php echo get_percentage($total,$classesAttended).'%';?></h1>
+        <h3>Name: <?php echo $row['student_name'];?></h3>
+        <h3>D Number: <?php echo $row['d_number'];?></h3>
+        <h3>Group: <?php echo $row2['group_name'];?></h3>
+        <h3>Email: <?php echo $row['email'];?></h3>
+        <h3>% of classes attended: <?php echo get_percentage($total,$classesAttended).'%';?></h3>
              
     </body>
 </html>

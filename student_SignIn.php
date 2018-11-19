@@ -10,15 +10,15 @@ if (!isset($_SESSION['student_session'])) {
   
 
 
-$query = "SELECT * FROM attendance WHERE student_id=:student_id";
-$statement = $db->prepare($query);
-$statement->bindValue(':student_id', $_SESSION['student_session']);
-$statement->execute();
-$row = $statement->fetch();
-
-if($row['status'] == 1){
-          header("Location: student_1.php");
-}
+//$query = "SELECT * FROM attendance WHERE student_id=:student_id";
+//$statement = $db->prepare($query);
+//$statement->bindValue(':student_id', $_SESSION['student_session']);
+//$statement->execute();
+//$row = $statement->fetch();
+//
+//if($row['status'] == 1){
+//          header("Location: attendanceAlreadyRecorded.php");
+//}
 
 
         
@@ -33,7 +33,7 @@ if($row['status'] == 1){
             </div>
             <h1>Success!</h1>
             <p>Your Attendance Has been Signed!!!</p>
-            <button type="button" class="redo btn">Ok</button>
+             <a href="student.php" style="text-decoration: none"><button type="button" class="redo btn">Ok</button></a>
         </div>
     </div>
 </div>
@@ -42,12 +42,13 @@ if($row['status'] == 1){
     <form class="record-form" id="record-form" autocomplete="off" method="post" action="code.php" >
         
         
-                    <div id="error">
-                        <!-- error will be shown here ! -->
-                    </div>
+                    
                                     <!-- 5PN6EA ! -->
         
-        <h1>RECORD ATTENDANCE</h1>
+        <h1>Record Attendance For <?php foreach ($_SESSION['current_class'] as $c) :echo $c['subject_name']; endforeach; ?></h1>
+        <div id="error">
+                        <!-- error will be shown here ! -->
+                    </div>
         <div class="form__group form__pincode">
             <label>Enter 6-char code from the Screen</label>
             <input type="text" name="pincode-1" maxlength="1" tabindex="1" placeholder="·" autocomplete="new-password">
@@ -62,7 +63,6 @@ if($row['status'] == 1){
         </div>
     </form>
 </div>
-<br>
 
 </body>
 <script src="folder/js.js" type="text/javascript"></script>

@@ -16,18 +16,6 @@ include "header.php";
             <span class="change">-- Click to see opposite state --</span>
         </div>
     </div>
-    <!--                <div class="row">
-                        <div class="modalbox error col-sm-8 col-md-6 col-lg-5 center animate" style="display: none;">
-                            <div class="icon">
-                                <span class="glyphicon glyphicon-thumbs-down"></span>
-                            </div>
-                            <h1>Oh no!</h1>
-                            <p>Oops! Something went wrong,
-                                <br> you should try again.</p>
-                            <button type="button" class="redo btn">Try again</button>
-                            <span class="change">-- Click to see opposite state --</span>
-                        </div>
-                    </div>-->
 </div>
 
 </body>

@@ -42,7 +42,7 @@ $('document').ready(function ()
             {
                 if (response === "Attendance recorded") 
                 {
-                     $("#record-form").fadeOut();
+                    $("#record-form").fadeOut();
                     $("#attendance_recorded").fadeIn();
 
                 } 

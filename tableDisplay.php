@@ -4,36 +4,35 @@ require "database.php";
 include "header.php";
 
 if (!isset($_SESSION['lecturer_session'])) {
-    header("Location: lecture_login.php");
+    header("Location: index.php");
 }
-//get all subjects
-$query = "SELECT * FROM subject WHERE lecture_id=:lecture_id AND day = DAYNAME(CURDATE()) AND start_time <= CURTIME() AND end_time >= CURTIME()";
+//get current subject
+$query = "SELECT * FROM subject WHERE lecturer_id=:lecturer_id AND day = DAYNAME(CURDATE()) AND start_time <= CURTIME() AND end_time >= CURTIME()";
 $statement = $db->prepare($query);
-$statement->bindValue(':lecture_id', $_SESSION['lecturer_session']);
+$statement->bindValue(':lecturer_id', $_SESSION['lecturer_session']);
 $statement->execute();
 $row = $statement->fetch();
 
 $studentCount = 1;
 
 //get subject group associated with current class that lecture is teaching
-$query2 = 'SELECT * FROM subject_group WHERE subject_id = :subject_id';
+$query2 = 'SELECT * FROM subject_group WHERE subject_id = :subject_id ORDER BY group_id';
 $statement2 = $db->prepare($query2);
 $statement2->bindValue(':subject_id', $row['subject_id']);
 $statement2->execute();
-$row2 = $statement2->fetch();
+$sub_groups = $statement2->fetchAll();
 
+
+foreach ($sub_groups as $sub_group) :
 
 //get students who have the group id
 $query3 = 'SELECT * FROM student WHERE group_id = :group_id ORDER BY student_id';
 $statement3 = $db->prepare($query3);
-$statement3->bindValue(':group_id', $row2['group_id']);
+$statement3->bindValue(':group_id', $sub_group['group_id']);
 $statement3->execute();
-$students = $statement3->fetchAll();
+$students[] = $statement3->fetchAll();
 $statement3->closeCursor();
-
-
-
-
+endforeach;
 
 ?>
 <!DOCTYPE html>
@@ -44,18 +43,22 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <link href="folder/main.css" rel="stylesheet" type="text/css"/>
-        <meta charset="UTF-8">
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="  crossorigin="anonymous"></script>
-        <script src="folder/js.js" type="text/javascript"></script>
         <title></title>
     </head>
     <body>
        
-         <a href="logout2.php"><h3>&nbsp;Sign Out</h3></a>
         <div class="subject_detail">
             <h2> <?php echo $row['subject_name']?></h2>
-        </div>
+        </div>  
+        
+   <div id="btns"> <center> <button class="btn btn-primary" id="mark-all-btn">Mark all as Present</button> 
+         
+   
+        
+        <button class="btn btn-primary"  id="submitAtt">Submit    </button>  </center></div>
+        
+        
+        
         <table class="greenTable">
             <thead>
                 <tr>
@@ -75,23 +78,36 @@ and open the template in the editor.
             </tfoot>
             <tbody>
                 <?php foreach ($students as $student) : ?>
+               
+                                <?php foreach ($student as $s) : ?>
                 <tr>
                     
                       <td><?php echo $studentCount++ ?></td> 
                       <td><?php                                                         
-                      echo $student['d_number']; ?></td> 
+                      echo $s['d_number']; ?></td> 
             
-            <td>   <div class="links"><a class="active"href="studentInfo.php?student_id=<?php echo $student['student_id'];?>"><?php echo $student['student_name']; ?></a></div></td>
-                            <td><div class="redx"><img src="image/x-png-35402.png" alt="red x"/></div>
-                                <div class="greenTick" style="display: none"><img src="image/green.png" alt="green tick"/></div> </td>        
+            <td>   <div class="links"><a class="active"href="studentInfo.php?student_id=<?php echo $s['student_id'];?>"><?php echo $s['student_name']; ?></a></div></td>
+            
+                            <td class="attendanceCell"><div class="redx"><img src="image/x-png-35402.png" alt="red x"/></div>
+                                <div class="greenTick" style="display: none"><img src="image/green.png" alt="green tick"/></div></td>  
+                           
+                                 <?php endforeach; ?>
+                
                  <?php endforeach; ?>
 
                             
                             
             </tbody>
-        </table>   
-        <button id="mark-all-btn"><b>Mark all as present</b></button>  
-        <input type="submit" value="SUBMIT" id="submitAtt">
+        </table>             
+    
+        
+
+        
+
+          
+          
+          
+          
           <div id="attendance_recorded" style="display: none">
             <div class="container space_left">
     <div class="row">
@@ -100,8 +116,8 @@ and open the template in the editor.
                 <span class="glyphicon glyphicon-ok"></span>
             </div>
             <h1>Success!</h1>
-            <p>Your Attendance Has been Signed!!!</p>
-            <button type="button" class="redo btn">Ok</button>
+            <p>Attendance Has Been submitted!!!</p>
+             <a href="lecturer.php" style="text-decoration: none"><button type="button" class="redo btn">   Ok</button></a>
         </div>
     </div>
 </div>
